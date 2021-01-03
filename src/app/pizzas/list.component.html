@@ -1,0 +1,33 @@
+﻿<h1>Pizza List</h1>
+<a routerLink="add" class="btn btn-sm btn-success mb-2">Add Pizza</a>
+<table class="table table-striped">
+    <thead>
+        <tr>
+            <th style="width: 20%">Name</th>
+            <th style="width: 20%">Image</th>
+            <th style="width: 20%">Size</th>
+            <th style="width: 20%">Price</th>
+            <th style="width: 20%"></th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let pizza of pizzas">
+            <td>{{pizza.name}}</td>
+            <td><img src="{{pizza.image}}" height="100" width="100"/></td>
+            <td>{{getSizeLabel(pizza.size)}}</td>
+            <td>{{pizza.price}}</td>
+            <td style="white-space: nowrap">
+                <a routerLink="edit/{{pizza.id}}" class="btn btn-sm btn-primary mr-1">Edit</a>
+                <button (click)="deletePizza(pizza.id)" class="btn btn-sm btn-danger btn-delete-pizza" [disabled]="pizza.isDeleting">
+                    <span *ngIf="pizza.isDeleting" class="spinner-border spinner-border-sm"></span>
+                    <span *ngIf="!pizza.isDeleting">Delete</span>
+                </button>
+            </td>
+        </tr>
+        <tr *ngIf="!pizzas">
+            <td colspan="4" class="text-center">
+                <span class="spinner-border spinner-border-lg align-center"></span>
+            </td>
+        </tr>
+    </tbody>
+</table>

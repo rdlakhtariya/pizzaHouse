@@ -1,0 +1,57 @@
+﻿<h1 *ngIf="isAddMode">Add Pizza</h1>
+<h1 *ngIf="!isAddMode">Edit Pizza</h1>
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+    <div class="form-row">
+        <div class="form-group col">
+            <label for="Name">Name</label>
+            <input type="text" formControlName="name" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.name.errors }" />
+            <div *ngIf="submitted && f.name.errors" class="invalid-feedback">
+                <div *ngIf="f.name.errors.required">Name is required</div>
+            </div>
+        </div>
+        <div class="form-group col">
+            <label for="Size">Size</label>
+            <select formControlName="size" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.size.errors }">
+                <option *ngFor="let pizzaSize of pizzaSizes;" [value]="pizzaSize.id">
+                {{pizzaSize.name}}
+                </option>
+            </select>
+            <div *ngIf="submitted && f.size.errors" class="invalid-feedback">
+                <div *ngIf="f.size.errors.required">Size is required</div>
+            </div>     
+        </div>
+    </div>
+    <div class="form-row">
+        <div class="form-group col">
+            <label for="image">Image Url</label>
+            <input type="text" formControlName="image" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.image.errors }" />
+            <div *ngIf="submitted && f.image.errors" class="invalid-feedback">
+                <div *ngIf="f.image.errors.required">Image is required</div>
+                <div *ngIf="f.image.errors.pattern">Please add proper Url.</div>
+            </div>
+        </div>
+        <div class="form-group col">
+            <label for="price">Price</label>
+            <input type="text" formControlName="price" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.price.errors }" />
+            <div *ngIf="submitted && f.price.errors" class="invalid-feedback">
+                <div *ngIf="f.price.errors.required">Price is required</div>
+            </div>
+        </div>   
+    </div>
+    <div class="form-row">
+        <div class="form-group col">
+            <label for="description">Description</label>
+            <textarea id="form7"  formControlName="description" class="md-textarea form-control" rows="3" [ngClass]="{ 'is-invalid': submitted && f.description.errors }"></textarea>
+            <div *ngIf="submitted && f.description.errors" class="invalid-feedback">
+                <div *ngIf="f.description.errors.required">Description is required</div>
+            </div>
+        </div>
+    </div>
+    <div class="form-group">
+        <button [disabled]="loading" class="btn btn-primary">
+            <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+            Save
+        </button>
+        <a routerLink="/pizzas" class="btn btn-link">Cancel</a>
+    </div>
+</form>
