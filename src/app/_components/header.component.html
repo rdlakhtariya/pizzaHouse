@@ -1,0 +1,24 @@
+<header>
+
+    <nav class="navbar navbar-expand navbar-dark bg-dark" *ngIf="user && user.role==true">
+        <div class="navbar-nav">
+            <!-- <a class="nav-item nav-link" routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">Home</a> -->
+            <a class="nav-item nav-link" routerLink="/users" routerLinkActive="active">Users</a>
+            <a class="nav-item nav-link" routerLink="/pizzas" routerLinkActive="active">Pizza</a>
+            <a class="nav-item nav-link" (click)="logout()">Logout</a>
+        </div>
+    </nav>
+    <nav class="navbar navbar-expand-md navbar-light fixed-top scrolling-navbar" *ngIf="user && user.role==false">
+        <div class="container-fluid">
+            <a class="navbar-brand" routerLink="/shop">
+                <img height="70" width="80" src="https://www.tonyspizzaandgrinders.com/wp-content/uploads/2017/02/logo_t.png" />
+              </a>
+            <div class="navbar-nav">
+                <a class="nav-item nav-link" routerLink="/cart" routerLinkActive="active">Cart</a>
+                <a class="nav-item nav-link" routerLink="/shop" routerLinkActive="active">Shop</a>
+                <!-- <a class="nav-item nav-link" routerLink="/" routerLinkActive="active" [routerLinkActiveOptions]="{exact: true}">About</a> -->
+                <a class="nav-item nav-link" (click)="logout()">Logout</a>
+            </div>
+        </div>
+    </nav>
+    </header>
